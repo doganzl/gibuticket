@@ -108,6 +108,32 @@ ul { list-style: none; }
   letter-spacing: -0.5px;
 }
 
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+  justify-content: center;
+}
+
+.header-nav-link {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gray-800);
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  transition: var(--transition);
+}
+
+.header-nav-link:hover {
+  color: var(--primary);
+  background: var(--primary-glow);
+}
+
+@media (max-width: 768px) {
+  .header-nav { display: none; }
+}
+
 .header-right {
   display: flex;
   align-items: center;
@@ -170,8 +196,15 @@ ul { list-style: none; }
 .hero-bg {
   position: absolute;
   inset: 0;
-  background: linear-gradient(145deg, #1c1008 0%, #2e1a00 50%, #1a0f00 100%);
+  background: url('배경.jpg') center center / cover no-repeat;
   z-index: 0;
+}
+
+.hero-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
 }
 
 .hero-pattern {
@@ -520,13 +553,7 @@ ul { list-style: none; }
     line-height: 1.3;
   }
 
-  /* 5번째 아이템(누적이용) — 3열 중 마지막 행 가운데 */
-  .trust-item:nth-child(4) {
-    grid-column: 1;
-  }
-  .trust-item:nth-child(5) {
-    grid-column: 2;
-  }
+  /* 6개 아이템 — 3열 2행으로 균등 배치 */
 
   .trust-item-icon {
     width: 36px; height: 36px;
@@ -539,13 +566,6 @@ ul { list-style: none; }
 @media (max-width: 400px) {
   .trust-bar-inner {
     grid-template-columns: repeat(2, 1fr);
-  }
-  /* 5번째 아이템 2열 중앙 */
-  .trust-item:nth-child(5) {
-    grid-column: 1 / -1;
-    max-width: 160px;
-    margin: 0 auto;
-    width: 100%;
   }
 }
 
@@ -1679,7 +1699,7 @@ ul { list-style: none; }
 }
 
 @media (max-width: 480px) {
-  .reviews-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .reviews-grid { grid-template-columns: 1fr; gap: 10px; }
   .review-card { padding: 16px; }
   .review-amount { font-size: 15px; }
 }
@@ -2107,13 +2127,15 @@ ul { list-style: none; }
 
   .rates-grid { grid-template-columns: 1fr; }
 
-  .rates-dark-grid { grid-template-columns: 1fr; }
+  .rates-dark-grid { grid-template-columns: 1fr; max-width: 420px; margin-left: auto; margin-right: auto; }
+  .rate-dark-card { text-align: center; }
+  .rate-dark-features { text-align: left; }
   .rates-dark-section { padding: 60px 20px; }
   .situation-section { padding: 60px 20px; }
   .situation-grid { grid-template-columns: 1fr; }
 
   .safe-process-grid { grid-template-columns: 1fr; gap: 16px; }
-  .voucher-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .voucher-grid { grid-template-columns: repeat(3, 1fr); gap: 10px; }
 
   .process-steps::before { display: none; }
   .process-steps { gap: 8px; }
@@ -2156,7 +2178,7 @@ ul { list-style: none; }
   .hero-rate-badge .rate-value { font-size: 22px; }
   .hero-rate-badge .rate-type { font-size: 10px; }
   .hero-rate-limit { font-size: 10px; }
-  .voucher-grid { grid-template-columns: repeat(2, 1fr); }
+  .voucher-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
 }
 
 /* ============ NUMBER COUNTER ANIMATION ============ */
