@@ -5,7 +5,7 @@
 /* ===== ★ 여기서 전화번호와 카카오 링크 수정 ★ ===== */
 const CONFIG = {
   phone:  '010-2026-2467',           // ← 전화번호 입력
-  kakao:  'https://open.kakao.com/o/xxxxxxxx', // ← 카카오 오픈채팅 링크 입력
+  kakao:  'https://open.kakao.com/o/sLHGfRmi', // ← 카카오 오픈채팅 링크 입력
 };
 /* ================================================== */
 
