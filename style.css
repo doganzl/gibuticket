@@ -63,7 +63,7 @@ ul { list-style: none; }
 /* ============ HEADER ============ */
 .header {
   position: fixed;
-  top: 0; left: 0; right: 0;
+  top: 41px; left: 0; right: 0;
   z-index: 1000;
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(12px);
@@ -190,7 +190,7 @@ ul { list-style: none; }
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  padding: 100px 24px 60px;
+  padding: 141px 24px 60px;
 }
 
 .hero-bg {
@@ -530,7 +530,7 @@ ul { list-style: none; }
   color: white;
 }
 
-/* 태블릿 이하: 3열 그리드, 아이콘+텍스트 세로 정렬 */
+/* 태블릿: 3열 */
 @media (max-width: 860px) {
   .trust-bar { padding: 20px 16px; }
 
@@ -549,11 +549,9 @@ ul { list-style: none; }
     padding: 8px 4px;
     background: rgba(255,255,255,0.04);
     border-radius: 10px;
-    white-space: normal;
+    white-space: nowrap;
     line-height: 1.3;
   }
-
-  /* 6개 아이템 — 3열 2행으로 균등 배치 */
 
   .trust-item-icon {
     width: 36px; height: 36px;
@@ -563,9 +561,14 @@ ul { list-style: none; }
   }
 }
 
-@media (max-width: 400px) {
+/* 모바일: 2열 — 셀 너비 충분해야 SKT·KT·LG·알뜰폰 가능 1줄 표시 */
+@media (max-width: 768px) {
   .trust-bar-inner {
     grid-template-columns: repeat(2, 1fr);
+    gap: 10px 12px;
+  }
+  .trust-item {
+    font-size: 13px;
   }
 }
 
@@ -755,7 +758,7 @@ ul { list-style: none; }
 /* ============ FEATURES ============ */
 .features-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
 }
 
@@ -842,6 +845,7 @@ ul { list-style: none; }
   padding: 36px 28px;
   position: relative;
   transition: var(--transition);
+  text-align: center;
 }
 
 .rate-dark-card:hover {
@@ -910,6 +914,7 @@ ul { list-style: none; }
   gap: 10px;
   border-top: 1px solid var(--gray-200);
   padding-top: 20px;
+  text-align: left;
 }
 
 .rate-dark-features li {
@@ -1139,13 +1144,16 @@ ul { list-style: none; }
 
 /* ============ 상품권 매입 ============ */
 .voucher-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 14px;
   margin-bottom: 36px;
 }
 
 .voucher-item {
+  flex: 0 0 calc(25% - 11px);
+  min-width: 150px;
   background: var(--white);
   border: 2px solid var(--gray-200);
   border-radius: var(--radius);
@@ -2035,10 +2043,14 @@ ul { list-style: none; }
 
 /* ============ NOTICE BANNER ============ */
 .notice-bar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1001;
   background: var(--primary-ultra-light);
   border-bottom: 1px solid rgba(255, 107, 0, 0.15);
   padding: 10px 24px;
   text-align: center;
+  overflow: hidden;
 }
 
 .notice-bar-inner {
@@ -2050,7 +2062,15 @@ ul { list-style: none; }
   align-items: center;
   justify-content: center;
   gap: 8px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  overflow: hidden;
+}
+
+.notice-bar-inner > span:not(.notice-bar-tag) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
 }
 
 .notice-bar-tag {
@@ -2115,7 +2135,7 @@ ul { list-style: none; }
   .header-inner { padding: 0 16px; height: 60px; }
   .header-phone { display: none; }
 
-  .hero { padding: 80px 20px 40px; }
+  .hero { padding: 121px 20px 40px; }
   .hero-logo-img { max-height: 70px; max-width: 220px; }
   .hero-slogan { letter-spacing: -1px; }
   .hero-rates { gap: 8px; }
@@ -2127,15 +2147,30 @@ ul { list-style: none; }
 
   .rates-grid { grid-template-columns: 1fr; }
 
-  .rates-dark-grid { grid-template-columns: 1fr; max-width: 420px; margin-left: auto; margin-right: auto; }
-  .rate-dark-card { text-align: center; }
-  .rate-dark-features { text-align: left; }
+  .rates-dark-grid { grid-template-columns: 1fr; max-width: 420px; margin-left: auto; margin-right: auto; padding-top: 20px; }
+  .rate-dark-card { padding: 32px 20px; }
   .rates-dark-section { padding: 60px 20px; }
   .situation-section { padding: 60px 20px; }
   .situation-grid { grid-template-columns: 1fr; }
 
   .safe-process-grid { grid-template-columns: 1fr; gap: 16px; }
-  .voucher-grid { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .voucher-grid { gap: 10px; }
+  .voucher-item { flex: 0 0 calc(50% - 5px); min-width: 0; font-size: 13px; word-break: keep-all; }
+
+  /* ---- 공지 바 마퀴 (mobile) ---- */
+  .notice-bar-inner {
+    justify-content: flex-start;
+    gap: 0;
+    overflow: hidden;
+  }
+  .notice-bar-tag { flex-shrink: 0; margin-right: 10px; }
+  .notice-bar-inner > span:not(.notice-bar-tag) {
+    white-space: nowrap;
+    overflow: visible;
+    text-overflow: initial;
+    min-width: max-content;
+    animation: noticeScroll 18s linear infinite;
+  }
 
   .process-steps::before { display: none; }
   .process-steps { gap: 8px; }
@@ -2163,6 +2198,11 @@ ul { list-style: none; }
   .float-btn { font-size: 14px; }
 }
 
+@keyframes noticeScroll {
+  0%   { transform: translateX(100vw); }
+  100% { transform: translateX(calc(-100% - 100vw)); }
+}
+
 @media (min-width: 769px) {
   .float-cta { display: none; }
 }
@@ -2178,7 +2218,8 @@ ul { list-style: none; }
   .hero-rate-badge .rate-value { font-size: 22px; }
   .hero-rate-badge .rate-type { font-size: 10px; }
   .hero-rate-limit { font-size: 10px; }
-  .voucher-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .voucher-grid { gap: 8px; }
+  .voucher-item { flex: 0 0 calc(50% - 4px); }
 }
 
 /* ============ NUMBER COUNTER ANIMATION ============ */
